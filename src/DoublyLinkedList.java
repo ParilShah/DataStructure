@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class DoublyLinkedList {
 	Head head;
@@ -144,6 +145,9 @@ public class DoublyLinkedList {
 		list.removeNode(list, 3);
 		System.out.println("Remove Node-------");
 		list.traverseLinkedList(list);
+		Scanner s = new Scanner(System.in);
+
+
 	}
 
 }
