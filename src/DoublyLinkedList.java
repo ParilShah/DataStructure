@@ -73,19 +73,52 @@ public class DoublyLinkedList {
 	}
     
     public void addNodeAfterNode(DoublyLinkedList l, int nodeNumber, int data){
-		
+		int numberOfNodes = l.numberOfNodes(l);
+		Node node = l.head.next;
+		if(nodeNumber>numberOfNodes || numberOfNodes<nodeNumber){
+			System.out.println("There are only "+numberOfNodes);
+			return;
+		}
+
+		for(int i=1; i<nodeNumber; i++){
+			if(nodeNumber != 1){
+				node = node.next;
+			}
+		}
+
+		Node newNextNode = node.next;
+		Node newNode = new Node(data, node, newNextNode);
+		node.next = newNode;
 	}
     
-    public void removeNodeAfterNode(DoublyLinkedList l, Node node){
-		
+    public void removeNode(DoublyLinkedList l, int nodeNumber){
+		int numberOfNodes = l.numberOfNodes(l);
+		Node node = l.head.next;
+		if(nodeNumber>numberOfNodes || numberOfNodes<nodeNumber){
+			System.out.println("There are only "+numberOfNodes);
+			return;
+		}
+
+		for(int i=1; i<nodeNumber; i++){
+			node = node.next;
+		}
+
+		Node nodeNext = node.next;
+		Node nodePrev = node.prev;
+		nodeNext.prev = nodePrev;
+		nodePrev.next = nodeNext;
+
 	}
-    
-    public void addNodeBeforeNode(DoublyLinkedList l, int nodeNumber, int data){
-		
-	}
-    
-    public void removeNodeBeforeNode(DoublyLinkedList l, Node node){
-		
+
+
+	public int numberOfNodes(DoublyLinkedList l){
+    	Node node = l.head.next;
+    	int numberOfNode = 0;
+    	while(node != null){
+    		numberOfNode ++;
+    		node = node.next;
+		}
+		return numberOfNode;
 	}
 
 	public static void main(String[] args) {
@@ -103,6 +136,13 @@ public class DoublyLinkedList {
 		list.traverseLinkedList(list);
 		list.removeNodefromLast(list);
 		System.out.println("Remove Node from Last-------");
+		list.traverseLinkedList(list);
+		System.out.println("Number of Nodes = " + list.numberOfNodes(list));
+		list.addNodeAfterNode(list, 1,15);
+		System.out.println("Add Node after Node-------");
+		list.traverseLinkedList(list);
+		list.removeNode(list, 3);
+		System.out.println("Remove Node-------");
 		list.traverseLinkedList(list);
 	}
 
